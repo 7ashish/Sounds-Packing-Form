@@ -1,0 +1,10 @@
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Release\SoundPacking_Final.exe.config
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Release\SoundPacking_Final.exe
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Release\SoundPacking_Final.pdb
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.Form1.resources
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.Properties.Resources.resources
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.csproj.GenerateResource.Cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.csproj.CoreCompileInputs.cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.exe
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.pdb
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Release\SoundPacking_Final.csprojResolveAssemblyReference.cache

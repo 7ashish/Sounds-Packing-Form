@@ -1,0 +1,30 @@
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csprojResolveAssemblyReference.cache
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Form1.resources
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Properties.Resources.resources
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.GenerateResource.cache
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.CoreCompileInputs.cache
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe.config
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.pdb
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.exe
+c:\users\yara\documents\visual studio 2017\Projects\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.pdb
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe.config
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.pdb
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Form1.resources
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Properties.Resources.resources
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.GenerateResource.cache
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.CoreCompileInputs.cache
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.exe
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.pdb
+C:\Users\Yara\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csprojResolveAssemblyReference.cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe.config
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.exe
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\bin\Debug\SoundPacking_Final.pdb
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csprojResolveAssemblyReference.cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Form1.resources
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.Properties.Resources.resources
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.GenerateResource.Cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.csproj.CoreCompileInputs.cache
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.exe
+C:\Users\shetos\Desktop\SoundPacking_Final\SoundPacking_Final\obj\Debug\SoundPacking_Final.pdb
