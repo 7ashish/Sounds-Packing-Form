@@ -95,227 +95,128 @@ static class Algorithms
     }
     static public void Best_Fit_Algorithm(Pair<string, TimeSpan>[] Line)
     {
-        List<Pair<string, TimeSpan>> Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-        List<List<Pair<string, TimeSpan>>> FolderList = new List<List<Pair<string, TimeSpan>>>(Line.Length); //O(1)
-        int counter = 0; //O(1)
-        //storing the remaining capacities in this list.
-        List<double> Seconds = new List<double>(Line.Length); //O(1)
-        //n = FileCount, m = FolderCount
-        for (int i = 0; i < Line.Length; i++) // O(n * m) //Looping on all files to fir them in folders.
+       
+        //double FolderLength = 100;
+        // list of the files in one folder 
+        List<Pair<string, TimeSpan>> filelist = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length, 20000));  //o(1)
+        // list of the folders that will be created
+        List<List<Pair<string, TimeSpan>>> FolderList = new List<List<Pair<string, TimeSpan>>>(Math.Min(Line.Length, 20000));  //o(1)
+        // list of time for each folder
+        List<double> Seconds = new List<double>(Math.Min(Line.Length, 20000)); //o(1)
+        // add first file in the first folder 
+        filelist.Add(Line[0]);    //o(1)
+        FolderList.Add(filelist);    //o(1)
+        Seconds.Add(Max_Folder_Length);    //o(1)
+        Seconds[0] -= Line[0].Second.TotalSeconds;    //o(1)
+        // loop at all files
+        for (int i = 1; i < Line.Length; i++)     //o(n)
         {
-            //At first if there are no folders, we create new folder and fit the file on it.
-            if (FolderList.Count == 0)  //O(1)
-            {
-                Temp.Add(Line[i]); //O(1)
-                FolderList.Add(Temp); //O(1)
-                Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                continue;
-            }
-            if (FolderList.Count == 1) //O(1) //If we have just 1 folder filled we check it's space if it fits or not.
-            {
-                if (Line[i].Second.TotalSeconds <= Seconds[counter]) //O(1)
-                {
-                    FolderList[counter].Add(Line[i]); //O(1)
-                    Seconds[counter] -= Line[i].Second.TotalSeconds; //O(1)
-                    if (Max_Folder_Length + Seconds[counter] == 0) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1)
-                        counter++; //O(1)
-                    }
-                    continue;
-                }
-                else  //if the file doesn't fit this folder, we create new folder as we only have 1 folder in our list.
-                {
-                    Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                    Temp.Add(Line[i]); //O(1)
-                    FolderList.Add(Temp); //O(1)
-                    Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                    continue;
-                }
-            }
-            //else we serach all reamining spaces for the best fit!.
-            bool Done = false; //O(1)
-            double min = Max_Folder_Length;  //O(1)
-            int index = 0; //O(1)
-            for (int k = 0; k < FolderList.Count; k++) //O(N) while N is the number of Folders
-            {
-                if (Seconds[k] < Line[i].Second.TotalSeconds) //O(1)
-                {
-                    continue;
-                }
-                if (Seconds[k] - Line[i].Second.TotalSeconds == Max_Folder_Length) //O(1)
-                {
-                    FolderList[k].Add(Line[i]); //O(1)
-                    Seconds[k] = 0; //O(1)
-                    Done = true; //O(1)  
-                    if (k == counter) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1) 
-                        counter++; //O(1)
-                    }
-                    break;
-                }
-                if (Seconds[k] - Line[i].Second.TotalSeconds < min) //O(1) 
-                {
-                    min = Seconds[k] - Line[i].Second.TotalSeconds; //O(1)
-                    index = k; //O(1)
-                }
+            // min variable with maximum lenght
+            double min = Max_Folder_Length;    //o(1)
+            int index = 0;               //o(1)
+            bool done = false;    //o(1)
 
-            }
-            if (!Done) //O(1)
+            // for loop to search for the minimum folder lengh and will fit the file size and the index to save it's loction
+            for (int j = 0; j < FolderList.Count; j++)     //o(m)
             {
-                if (min == Max_Folder_Length) //O(1)
+                if (min >= Seconds[j] && Seconds[j] != 0 && Seconds[j] >= Line[i].Second.TotalSeconds)   //o(1)
                 {
-                    Temp = new List<Pair<string, TimeSpan>>(); //O(1)
-                    Temp.Add(Line[i]); //O(1)
-                    FolderList.Add(Temp); //O(1) 
-                    Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                    counter++; //O(1)
+                    min = Seconds[j];           //o(1)
+                    index = j;             //o(1)
+                    done = true;         //o(1)
                 }
-                else
-                {
-                    FolderList[index].Add(Line[i]); //O(1)
-                    Seconds[index] -= Line[i].Second.TotalSeconds; //O(1)
-                    if (Max_Folder_Length + Seconds[counter] == 0) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1)
-                        counter++; //O(1)
-                    }
-                }
+            }
+            // make sure that the time will not be negtive 
+            double temp = Seconds[index] - Line[i].Second.TotalSeconds;  //o(1)
+            // if the best folder found add the file on it and minus its time from the folder 
+            if (done == true && temp >= 0)           //o(1)
+            {
+                FolderList[index].Add(Line[i]);                 //o(1)
+                Seconds[index] -= Line[i].Second.TotalSeconds;         //o(1)
+            }
+            // if not found add at the end of the list
+            else
+            {
+                filelist = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length, 20000));       //o(1)
+                filelist.Add(Line[i]);             //o(1)
+                FolderList.Add(filelist);          //o(1)
+                Seconds.Add(Max_Folder_Length);            //o(1)
+                Seconds[FolderList.Count - 1] -= Line[i].Second.TotalSeconds;      //o(1)
             }
         }
         //shrinking lists to the exact count of elements
-        foreach (List<Pair<string, TimeSpan>> lp in FolderList) //O(N) while N is the number of files
+        foreach (List<Pair<string, TimeSpan>> lp in FolderList)
         {
             lp.TrimExcess();
         }
         //shrinking folder list
         FolderList.TrimExcess();
-        //clearing seconds list because it was never nessecary........
+        //clearing seconds list
         Seconds.Clear();
         //FileOperations.FinializeDirectory(FolderList);
-    }  //O(n*m)
+    }
     static public void Best_Fit_Decreasing_Algorithm(Pair<string, TimeSpan>[] Line)
     {
         Array.Sort(Line); //O(nlogn)
-        List<Pair<string, TimeSpan>> Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-        List<List<Pair<string, TimeSpan>>> FolderList = new List<List<Pair<string, TimeSpan>>>(Line.Length); //O(1)
-        int counter = 0; //O(1)
-        //storing the remaining capacities in this list.
-        List<double> Seconds = new List<double>(Line.Length); //O(1)
-        //n = FileCount, m = FolderCount
-        for (int i = 0; i < Line.Length; i++) // O(n * m) //Looping on all files to fir them in folders.
+        //double FolderLength = 100;
+        // list of the files in one folder 
+        List<Pair<string, TimeSpan>> filelist = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length, 20000));  //o(1)
+        // list of the folders that will be created
+        List<List<Pair<string, TimeSpan>>> FolderList = new List<List<Pair<string, TimeSpan>>>(Math.Min(Line.Length, 20000));  //o(1)
+        // list of time for each folder
+        List<double> Seconds = new List<double>(Math.Min(Line.Length, 20000)); //o(1)
+        // add first file in the first folder 
+        filelist.Add(Line[0]);    //o(1)
+        FolderList.Add(filelist);    //o(1)
+        Seconds.Add(Max_Folder_Length);    //o(1)
+        Seconds[0] -= Line[0].Second.TotalSeconds;    //o(1)
+        // loop at all files
+        for (int i = 1; i < Line.Length; i++)     //o(n)
         {
-            //At first if there are no folders, we create new folder and fit the file on it.
-            if (FolderList.Count == 0)  //O(1)
-            {
-                Temp.Add(Line[i]); //O(1)
-                FolderList.Add(Temp); //O(1)
-                Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                continue;
-            }
-            if (FolderList.Count == 1) //O(1) //If we have just 1 folder filled we check it's space if it fits or not.
-            {
-                if (Line[i].Second.TotalSeconds <= Seconds[counter]) //O(1)
-                {
-                    FolderList[counter].Add(Line[i]); //O(1)
-                    Seconds[counter] -= Line[i].Second.TotalSeconds; //O(1)
-                    if (Max_Folder_Length + Seconds[counter] == 0) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1)
-                        counter++; //O(1)
-                    }
-                    continue;
-                }
-                else  //if the file doesn't fit this folder, we create new folder as we only have 1 folder in our list.
-                {
-                    Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                    Temp.Add(Line[i]); //O(1)
-                    FolderList.Add(Temp); //O(1)
-                    Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                    continue;
-                }
-            }
-            //else we serach all reamining spaces for the best fit!.
-            bool Done = false; //O(1)
-            double min = Max_Folder_Length;  //O(1)
-            int index = 0; //O(1)
-            for (int k = 0; k < FolderList.Count; k++) //O(N) while N is the number of Folders
-            {
-                if (Seconds[k] < Line[i].Second.TotalSeconds) //O(1)
-                {
-                    continue;
-                }
-                if (Seconds[k] - Line[i].Second.TotalSeconds == Max_Folder_Length) //O(1)
-                {
-                    FolderList[k].Add(Line[i]); //O(1)
-                    Seconds[k] = 0; //O(1)
-                    Done = true; //O(1)  
-                    if (k == counter) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1) 
-                        counter++; //O(1)
-                    }
-                    break;
-                }
-                if (Seconds[k] - Line[i].Second.TotalSeconds < min) //O(1) 
-                {
-                    min = Seconds[k] - Line[i].Second.TotalSeconds; //O(1)
-                    index = k; //O(1)
-                }
+            // min variable with maximum lenght
+            double min = Max_Folder_Length;    //o(1)
+            int index = 0;               //o(1)
+            bool done = false;    //o(1)
 
-            }
-            if (!Done) //O(1)
+            // for loop to search for the minimum folder lengh and will fit the file size and the index to save it's loction
+            for (int j = 0; j < FolderList.Count; j++)     //o(m)
             {
-                if (min == Max_Folder_Length) //O(1)
+                if (min >= Seconds[j] && Seconds[j] != 0 && Seconds[j] >= Line[i].Second.TotalSeconds)   //o(1)
                 {
-                    Temp = new List<Pair<string, TimeSpan>>(); //O(1)
-                    Temp.Add(Line[i]); //O(1)
-                    FolderList.Add(Temp); //O(1) 
-                    Seconds.Add(Max_Folder_Length - Line[i].Second.TotalSeconds); //O(1)
-                    counter++; //O(1)
+                    min = Seconds[j];           //o(1)
+                    index = j;             //o(1)
+                    done = true;         //o(1)
                 }
-                else
-                {
-                    FolderList[index].Add(Line[i]); //O(1)
-                    Seconds[index] -= Line[i].Second.TotalSeconds; //O(1)
-                    if (Max_Folder_Length + Seconds[counter] == 0) //O(1)
-                    {
-                        Temp = new List<Pair<string, TimeSpan>>(Line.Length); //O(1)
-                        Temp.Add(Line[i]); //O(1)
-                        FolderList.Add(Temp); //O(1)
-                        Seconds.Add(100); //O(1)
-                        counter++; //O(1)
-                    }
-                }
+            }
+            // make sure that the time will not be negtive 
+            double temp = Seconds[index] - Line[i].Second.TotalSeconds;  //o(1)
+            // if the best folder found add the file on it and minus its time from the folder 
+            if (done == true && temp >= 0)           //o(1)
+            {
+                FolderList[index].Add(Line[i]);                 //o(1)
+                Seconds[index] -= Line[i].Second.TotalSeconds;         //o(1)
+            }
+            // if not found add at the end of the list
+            else
+            {
+                filelist = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length, 20000));       //o(1)
+                filelist.Add(Line[i]);             //o(1)
+                FolderList.Add(filelist);          //o(1)
+                Seconds.Add(Max_Folder_Length);            //o(1)
+                Seconds[FolderList.Count - 1] -= Line[i].Second.TotalSeconds;      //o(1)
             }
         }
         //shrinking lists to the exact count of elements
-        foreach (List<Pair<string, TimeSpan>> lp in FolderList) //O(N) while N is the number of files
+        foreach (List<Pair<string, TimeSpan>> lp in FolderList)
         {
             lp.TrimExcess();
         }
         //shrinking folder list
         FolderList.TrimExcess();
-        //clearing seconds list because it was never nessecary........
+        //clearing seconds list
         Seconds.Clear();
         //FileOperations.FinializeDirectory(FolderList);
-    } 
+    }
     static public void Worst_Fit_Algorithm(Pair<string, TimeSpan>[] Line)//O(n*m)
     {
         List<Pair<string, TimeSpan>> Temp = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length, 20000)); //O(1)
@@ -364,7 +265,7 @@ static class Algorithms
             }
             int index = 0; //O(1)
             double max = 0; //O(1)
-            for (int k = 0; k < Seconds.Count; k++) //O(1) //looping on all folders to search for the max free folder to put the current file.
+            for (int k = 0; k < Seconds.Count; k++) //O(N) //looping on all folders to search for the max free folder to put the current file.
             {
                 if (Seconds[k] < Line[i].Second.TotalSeconds) //O(1)
                 {
@@ -451,7 +352,7 @@ static class Algorithms
             }
             int index = 0; //O(1)
             double max = 0; //O(1)
-            for (int k = 0; k < Seconds.Count; k++) //O(1) //looping on all folders to search for the max free folder to put the current file.
+            for (int k = 0; k < Seconds.Count; k++) //O(N) //looping on all folders to search for the max free folder to put the current file.
             {
                 if (Seconds[k] < Line[i].Second.TotalSeconds) //O(1)
                 {
@@ -559,8 +460,8 @@ static class Algorithms
         //shrinking folder list
         FolderList.TrimExcess();
         //FileOperations.FinializeDirectory(FolderList);
-    } //O(n*m)
-    static public void Worst_Fit_Decreasing_Algorithm_Priority_Queue(Pair<string, TimeSpan>[] Line)
+    } 
+    static public void Worst_Fit_Decreasing_Algorithm_Priority_Queue(Pair<string, TimeSpan>[] Line)//O(n*m)
     {
         Array.Sort(Line); //O(nlogn)
         PriorityQueue<Pair<int, double>> PQueue = new PriorityQueue<Pair<int, double>>(); //O(1) //saving free spaces in folders.
@@ -664,7 +565,7 @@ static class Algorithms
         }
         List<Pair<string, TimeSpan>> Traversal()
         {
-            List<Pair<string, TimeSpan>> ans = new List<Pair<string, TimeSpan>>();
+            List<Pair<string, TimeSpan>> ans = new List<Pair<string, TimeSpan>>(Math.Min(Line.Length,20000));
             int w = 0;
             for (int i = 0; i < Line.Length; i++) //O(N) where n is the number of files.
             {
@@ -683,7 +584,7 @@ static class Algorithms
             }
             return ans; //O(1)
         }
-        List<List<Pair<string, TimeSpan>>> Folders = new List<List<Pair<string, TimeSpan>>>(); //O(1)
+        List<List<Pair<string, TimeSpan>>> Folders = new List<List<Pair<string, TimeSpan>>>(Math.Min(Line.Length, 20000)); //O(1)
         while (Count > 0) //O(N^2 * D) 
         {
             IterativeKnapsack(); //O(N*D)
